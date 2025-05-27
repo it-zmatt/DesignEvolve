@@ -7,6 +7,8 @@ import { useTranslation } from "@/lib/TranslationContext";
 import type { Service } from "@shared/schema";
 
 export default function Services() {
+  const { t } = useTranslation();
+  
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
@@ -19,10 +21,10 @@ export default function Services() {
       <section className="pt-24 pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="heading-primary mb-6">
-            Our <span className="font-bold">Services</span>
+            {t("page.services.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive architectural solutions tailored to meet diverse client needs and project requirements.
+            {t("page.services.subtitle")}
           </p>
         </div>
       </section>
@@ -76,10 +78,10 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="heading-secondary mb-6">
-              Our <span className="font-bold">Process</span>
+              {t("services.process")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              A systematic approach ensuring every project is delivered with precision and excellence.
+              {t("services.process.subtitle")}
             </p>
           </div>
 
@@ -88,9 +90,9 @@ export default function Services() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-2xl font-bold text-accent">1</span>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Discovery</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("services.discovery")}</h3>
               <p className="text-muted-foreground">
-                Understanding your vision, requirements, and project goals through detailed consultation.
+                {t("services.discovery.text")}
               </p>
             </div>
 
@@ -98,9 +100,9 @@ export default function Services() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-2xl font-bold text-accent">2</span>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Design</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("services.design")}</h3>
               <p className="text-muted-foreground">
-                Creating innovative design solutions that balance aesthetics, functionality, and sustainability.
+                {t("services.design.text")}
               </p>
             </div>
 
@@ -108,9 +110,9 @@ export default function Services() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-2xl font-bold text-accent">3</span>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Development</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("services.development")}</h3>
               <p className="text-muted-foreground">
-                Detailed planning, documentation, and coordination with all stakeholders and contractors.
+                {t("services.development.text")}
               </p>
             </div>
 
@@ -118,9 +120,9 @@ export default function Services() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-2xl font-bold text-accent">4</span>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Delivery</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("services.delivery")}</h3>
               <p className="text-muted-foreground">
-                Project management and oversight ensuring quality construction and timely completion.
+                {t("services.delivery.text")}
               </p>
             </div>
           </div>
