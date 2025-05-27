@@ -4,18 +4,19 @@ import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/lib/TranslationContext";
 
 export default function Navigation() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState("EN");
+  const { language, setLanguage, t } = useTranslation();
 
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/portfolio", label: "Portfolio" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/services", label: t("nav.services") },
+    { href: "/portfolio", label: t("nav.portfolio") },
+    { href: "/contact", label: t("nav.contact") },
   ];
 
   const isActive = (href: string) => {
@@ -30,9 +31,7 @@ export default function Navigation() {
   ];
 
   const handleLanguageChange = (languageCode: string) => {
-    setCurrentLanguage(languageCode);
-    // In a real implementation, this would trigger translation
-    console.log(`Language changed to: ${languageCode}`);
+    setLanguage(languageCode as any);
   };
 
   return (
@@ -74,21 +73,21 @@ export default function Navigation() {
                     className="ml-4 border-accent text-accent hover:bg-accent hover:text-white transition-colors"
                   >
                     <Globe className="w-4 h-4 mr-2" />
-                    {currentLanguage}
+                    {language}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-40">
-                  {languages.map((language) => (
+                  {languages.map((lang) => (
                     <DropdownMenuItem
-                      key={language.code}
-                      onClick={() => handleLanguageChange(language.code)}
+                      key={lang.code}
+                      onClick={() => handleLanguageChange(lang.code)}
                       className={cn(
                         "cursor-pointer flex items-center gap-2",
-                        currentLanguage === language.code && "bg-accent/10 text-accent"
+                        language === lang.code && "bg-accent/10 text-accent"
                       )}
                     >
-                      <span className="text-lg">{language.flag}</span>
-                      <span>{language.label}</span>
+                      <span className="text-lg">{lang.flag}</span>
+                      <span>{lang.label}</span>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
