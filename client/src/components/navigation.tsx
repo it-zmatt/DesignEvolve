@@ -50,6 +50,15 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
+              <Link href="/about">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="ml-4 border-accent text-accent hover:bg-accent hover:text-white transition-colors"
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
 
