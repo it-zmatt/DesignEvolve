@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/TranslationContext";
 
 interface HeroSectionProps {
   title: string;
@@ -14,6 +15,8 @@ export default function HeroSection({
   backgroundImage,
   onViewProjects,
 }: HeroSectionProps) {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -29,9 +32,7 @@ export default function HeroSection({
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl px-6">
         <h1 className="heading-primary mb-6 leading-tight fade-in">
-          Timeless
-          <br />
-          <span className="font-bold">Architecture</span>
+          {title}
         </h1>
         <p className="text-xl md:text-2xl font-light mb-8 text-gray-200 slide-up">
           {subtitle}
@@ -40,7 +41,7 @@ export default function HeroSection({
           onClick={onViewProjects}
           className="btn-primary"
         >
-          View Our Projects
+          {t("hero.cta")}
         </Button>
       </div>
 

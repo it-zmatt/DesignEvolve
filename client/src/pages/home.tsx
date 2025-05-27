@@ -7,9 +7,12 @@ import StatsSection from "@/components/stats-section";
 import ProjectCard from "@/components/project-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/lib/TranslationContext";
 import type { Project, Content } from "@shared/schema";
 
 export default function Home() {
+  const { t } = useTranslation();
+  
   const { data: featuredProjects, isLoading: projectsLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects?featured=true"],
   });
@@ -32,19 +35,19 @@ export default function Home() {
 
   const stats = [
     {
-      value: "10+",
-      label: "Years Experience",
-      description: "Delivering exceptional architectural solutions since 2013"
+      value: t("stats.years.value"),
+      label: t("stats.years.label"),
+      description: t("stats.years.description")
     },
     {
-      value: "50+",
-      label: "Completed Projects",
-      description: "From residential homes to commercial complexes"
+      value: t("stats.projects.value"),
+      label: t("stats.projects.label"),
+      description: t("stats.projects.description")
     },
     {
-      value: "100%",
-      label: "Client Satisfaction",
-      description: "Committed to exceeding expectations every time"
+      value: t("stats.satisfaction.value"),
+      label: t("stats.satisfaction.label"),
+      description: t("stats.satisfaction.description")
     }
   ];
 
@@ -54,8 +57,8 @@ export default function Home() {
       
       {/* Hero Section */}
       <HeroSection
-        title={getContentValue("hero.title", "Timeless Architecture")}
-        subtitle={getContentValue("hero.subtitle", "10+ Years. 50+ Projects. Exceptional Design.")}
+        title={t("hero.title")}
+        subtitle={t("hero.subtitle")}
         backgroundImage="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
         onViewProjects={handleViewProjects}
       />

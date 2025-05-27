@@ -136,25 +136,25 @@ export default function Navigation() {
             <div className="px-3 py-2 border-t border-border mt-2">
               <div className="text-sm font-medium text-primary mb-2 flex items-center gap-2">
                 <Globe className="w-4 h-4" />
-                Language
+                {t("nav.language")}
               </div>
               <div className="space-y-1">
-                {languages.map((language) => (
+                {languages.map((lang) => (
                   <button
-                    key={language.code}
+                    key={lang.code}
                     onClick={() => {
-                      handleLanguageChange(language.code);
+                      handleLanguageChange(lang.code);
                       setMobileMenuOpen(false);
                     }}
                     className={cn(
                       "w-full text-left px-2 py-1 rounded flex items-center gap-2 text-sm",
-                      currentLanguage === language.code
+                      language === lang.code
                         ? "bg-accent/10 text-accent font-medium"
                         : "text-muted-foreground hover:text-accent"
                     )}
                   >
-                    <span className="text-base">{language.flag}</span>
-                    <span>{language.label}</span>
+                    <span className="text-base">{lang.flag}</span>
+                    <span>{lang.label}</span>
                   </button>
                 ))}
               </div>
