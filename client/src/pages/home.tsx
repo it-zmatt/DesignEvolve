@@ -8,6 +8,7 @@ import ProjectCard from "@/components/project-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
+import { getFeaturedProjects, getContent } from "@/lib/dataService";
 import type { Project, Content } from "@shared/schema";
 
 export default function Home() {

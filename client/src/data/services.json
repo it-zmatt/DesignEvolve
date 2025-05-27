@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Residential Design",
+    "description": "Custom home design services that blend functionality with aesthetic excellence. From concept to completion, we create living spaces that reflect your lifestyle and values.",
+    "icon": "home",
+    "order": 1
+  },
+  {
+    "id": 2,
+    "title": "Commercial Design", 
+    "description": "Innovative commercial spaces that enhance productivity and brand identity. We design offices, retail spaces, and mixed-use developments that drive business success.",
+    "icon": "building",
+    "order": 2
+  },
+  {
+    "id": 3,
+    "title": "Interior Design",
+    "description": "Complete interior design solutions that transform spaces into beautiful, functional environments. Our team handles everything from space planning to furniture selection.",
+    "icon": "palette",
+    "order": 3
+  },
+  {
+    "id": 4,
+    "title": "Project Management",
+    "description": "Comprehensive project management services ensuring your architectural project is delivered on time, within budget, and to the highest quality standards.",
+    "icon": "clipboard",
+    "order": 4
+  }
+]

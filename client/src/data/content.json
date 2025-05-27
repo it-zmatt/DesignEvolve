@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "key": "hero.title",
+    "value": "Timeless Architecture"
+  },
+  {
+    "id": 2,
+    "key": "hero.subtitle", 
+    "value": "Creating spaces that inspire and endure through innovative design and sustainable practices."
+  },
+  {
+    "id": 3,
+    "key": "about.description",
+    "value": "Founded in 2013, AXIS Architecture has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience."
+  },
+  {
+    "id": 4,
+    "key": "stats.experience",
+    "value": "10+"
+  },
+  {
+    "id": 5,
+    "key": "stats.projects",
+    "value": "50+"
+  },
+  {
+    "id": 6,
+    "key": "stats.awards",
+    "value": "15"
+  }
+]
