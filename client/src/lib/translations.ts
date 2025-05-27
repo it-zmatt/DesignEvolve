@@ -25,6 +25,21 @@ export const translations: Translations = {
     AR: 'الخدمات',
     FR: 'Services'
   },
+  'nav.services.residential': {
+    EN: 'Residential Design',
+    AR: 'التصميم السكني',
+    FR: 'Design Résidentiel'
+  },
+  'nav.services.commercial': {
+    EN: 'Commercial Design',
+    AR: 'التصميم التجاري',
+    FR: 'Design Commercial'
+  },
+  'nav.services.interior': {
+    EN: 'Interior Design',
+    AR: 'التصميم الداخلي',
+    FR: 'Design Intérieur'
+  },
   'nav.portfolio': {
     EN: 'Portfolio',
     AR: 'أعمالنا',
