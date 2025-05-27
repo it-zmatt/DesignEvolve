@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useTranslation } from "@/lib/TranslationContext";
+import { getContent } from "@/lib/dataService";
 import { insertContactSchema } from "@shared/schema";
 import type { Content, InsertContact } from "@shared/schema";
 import { z } from "zod";
@@ -33,7 +34,8 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: content, isLoading: contentLoading } = useQuery<Content[]>({
-    queryKey: ["/api/content"],
+    queryKey: ["content"],
+    queryFn: getContent,
   });
 
   const form = useForm<ContactFormData>({

@@ -182,26 +182,6 @@ export const translations: Translations = {
   },
   'page.portfolio.subtitle': {
     EN: 'Explore our diverse collection of architectural projects that demonstrate our commitment to design excellence and innovation.',
-    AR: 'استكشف مجموعتنا المتنوعة من المشاريع المعمارية التي تظهر التزامنا بالتميز في التصميم والابتكار.',
-    FR: 'Explorez notre collection diversifiée de projets architecturaux qui démontrent notre engagement envers l\'excellence du design et l\'innovation.'
-  },
-  'page.contact.title': {
-    EN: 'Get in Touch',
-    AR: 'تواصل معنا',
-    FR: 'Contactez-nous'
-  },
-  'page.contact.subtitle': {
-    EN: 'Ready to bring your architectural vision to life? Contact us to discuss your project and discover how we can help.',
-    AR: 'مستعد لتحقيق رؤيتك المعمارية؟ تواصل معنا لمناقشة مشروعك واكتشف كيف يمكننا المساعدة.',
-    FR: 'Prêt à donner vie à votre vision architecturale? Contactez-nous pour discuter de votre projet et découvrir comment nous pouvons vous aider.'
-  },
-  'page.portfolio.title': {
-    EN: 'Our Portfolio',
-    AR: 'أعمالنا',
-    FR: 'Notre Portfolio'
-  },
-  'page.portfolio.subtitle': {
-    EN: 'Explore our diverse collection of architectural projects that demonstrate our commitment to design excellence and innovation.',
     AR: 'استكشف مجموعتنا المتنوعة من المشاريع المعمارية التي تُظهر التزامنا بالتميز في التصميم والابتكار.',
     FR: 'Explorez notre collection diversifiée de projets architecturaux qui démontrent notre engagement envers l\'excellence du design et l\'innovation.'
   },
