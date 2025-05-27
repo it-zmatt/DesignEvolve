@@ -73,7 +73,7 @@ export default function Home() {
             <div className="space-y-8">
               <div>
                 <h2 className="heading-secondary mb-6">
-                  About <span className="font-bold">AXIS</span>
+                  {t("about.title")}
                 </h2>
                 {contentLoading ? (
                   <div className="space-y-4">
@@ -83,14 +83,14 @@ export default function Home() {
                   </div>
                 ) : (
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    {getContentValue("about.description", "Founded in 2013, AXIS Architecture has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence.")}
+                    {t("about.description")}
                   </p>
                 )}
               </div>
               
               <Link href="/about">
                 <Button variant="outline" className="btn-secondary">
-                  Learn More About Us
+                  {t("about.cta")}
                 </Button>
               </Link>
             </div>
@@ -116,10 +116,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="heading-secondary mb-6">
-              Featured <span className="font-bold">Projects</span>
+              {t("projects.featured.title")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore some of our most remarkable architectural achievements that showcase our design philosophy and technical expertise.
+              {t("projects.featured.description")}
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export default function Home() {
           <div className="text-center">
             <Link href="/portfolio">
               <Button className="btn-primary">
-                View All Projects
+                {t("projects.view.all")}
               </Button>
             </Link>
           </div>
