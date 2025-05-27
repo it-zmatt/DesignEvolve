@@ -3,6 +3,7 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/lib/TranslationContext";
 import type { Service } from "@shared/schema";
 
 export default function Services() {

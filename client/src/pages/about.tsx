@@ -2,9 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/lib/TranslationContext";
 import type { Content } from "@shared/schema";
 
 export default function About() {
+  const { t } = useTranslation();
+  
   const { data: content, isLoading } = useQuery<Content[]>({
     queryKey: ["/api/content"],
   });
@@ -22,10 +25,10 @@ export default function About() {
       <section className="pt-24 pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="heading-primary mb-6">
-            About <span className="font-bold">AXIS</span>
+            {t("page.about.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Pioneering architectural excellence through innovative design and sustainable practices for over a decade.
+            {t("page.about.subtitle")}
           </p>
         </div>
       </section>
@@ -51,10 +54,10 @@ export default function About() {
               ) : (
                 <div>
                   <h2 className="text-4xl md:text-5xl font-light text-primary mb-6">
-                    Our <span className="font-bold">Story</span>
+                    {t("about.our.story")}
                   </h2>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    {getContentValue("about.description", "Founded in 2013, AXIS Architecture has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience.")}
+                    {t("about.description")}
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     We specialize in sustainable design practices, ensuring that our projects not only meet today's needs but also contribute to a better tomorrow. From conceptual design to project completion, we work closely with our clients to bring their vision to life.
@@ -64,15 +67,15 @@ export default function About() {
               
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <h4 className="font-semibold text-primary mb-2">Our Mission</h4>
+                  <h4 className="font-semibold text-primary mb-2">{t("about.mission")}</h4>
                   <p className="text-muted-foreground text-sm">
-                    Creating timeless spaces that enhance human connection and environmental harmony.
+                    {t("about.mission.text")}
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary mb-2">Our Vision</h4>
+                  <h4 className="font-semibold text-primary mb-2">{t("about.vision")}</h4>
                   <p className="text-muted-foreground text-sm">
-                    To be recognized as leaders in sustainable and innovative architectural design.
+                    {t("about.vision.text")}
                   </p>
                 </div>
               </div>
@@ -99,10 +102,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="heading-secondary mb-6">
-              Our <span className="font-bold">Values</span>
+              {t("about.values")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The principles that guide every project we undertake and every relationship we build.
+              {t("about.values.subtitle")}
             </p>
           </div>
 
@@ -111,9 +114,9 @@ export default function About() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <i className="fas fa-lightbulb text-2xl text-accent"></i>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Innovation</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("about.innovation")}</h3>
               <p className="text-muted-foreground">
-                Pushing the boundaries of design while respecting timeless architectural principles.
+                {t("about.innovation.text")}
               </p>
             </div>
 
@@ -121,9 +124,9 @@ export default function About() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <i className="fas fa-leaf text-2xl text-accent"></i>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Sustainability</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("about.sustainability")}</h3>
               <p className="text-muted-foreground">
-                Committed to environmentally conscious design that preserves our planet for future generations.
+                {t("about.sustainability.text")}
               </p>
             </div>
 
@@ -131,9 +134,9 @@ export default function About() {
               <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <i className="fas fa-users text-2xl text-accent"></i>
               </div>
-              <h3 className="text-xl font-semibold text-primary">Collaboration</h3>
+              <h3 className="text-xl font-semibold text-primary">{t("about.collaboration")}</h3>
               <p className="text-muted-foreground">
-                Working closely with clients to understand their vision and bring it to life.
+                {t("about.collaboration.text")}
               </p>
             </div>
           </div>
