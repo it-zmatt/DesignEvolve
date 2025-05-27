@@ -26,9 +26,9 @@ export default function Portfolio() {
     { key: "interior", label: t("nav.services.interior") },
   ];
 
-  const filteredProjects = projects?.filter(project => 
-    activeFilter === "all" || project.category === activeFilter
-  ) || [];
+  const filteredProjects = projects || [];
+
+
 
   return (
     <div className="min-h-screen">
@@ -38,10 +38,10 @@ export default function Portfolio() {
       <section className="pt-24 pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="heading-primary mb-6">
-            Our <span className="font-bold">Portfolio</span>
+            {t("page.portfolio.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our diverse collection of architectural projects that demonstrate our commitment to design excellence and innovation.
+            {t("page.portfolio.subtitle")}
           </p>
         </div>
       </section>
