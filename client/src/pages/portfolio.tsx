@@ -6,9 +6,11 @@ import ProjectCard from "@/components/project-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/lib/TranslationContext";
 import type { Project } from "@shared/schema";
 
 export default function Portfolio() {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("all");
 
   const { data: projects, isLoading } = useQuery<Project[]>({
@@ -16,10 +18,10 @@ export default function Portfolio() {
   });
 
   const filters = [
-    { key: "all", label: "All Projects" },
-    { key: "residential", label: "Residential" },
-    { key: "commercial", label: "Commercial" },
-    { key: "interior", label: "Interior" },
+    { key: "all", label: t("portfolio.filter.all") },
+    { key: "residential", label: t("nav.services.residential") },
+    { key: "commercial", label: t("nav.services.commercial") },
+    { key: "interior", label: t("nav.services.interior") },
   ];
 
   const filteredProjects = projects?.filter(project => 

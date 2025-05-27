@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useTranslation } from "@/lib/TranslationContext";
 import { insertContactSchema } from "@shared/schema";
 import type { Content, InsertContact } from "@shared/schema";
 import { z } from "zod";
@@ -27,6 +28,7 @@ const contactFormSchema = insertContactSchema.extend({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Contact() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,16 +53,16 @@ export default function Contact() {
     },
     onSuccess: () => {
       toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you as soon as possible.",
+        title: t("contact.success"),
+        description: t("contact.success.text"),
       });
       form.reset();
       queryClient.invalidateQueries({ queryKey: ["/api/contacts"] });
     },
     onError: () => {
       toast({
-        title: "Error sending message",
-        description: "Please try again later.",
+        title: t("contact.error"),
+        description: t("contact.error.text"),
         variant: "destructive",
       });
     },
