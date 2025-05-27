@@ -14,7 +14,7 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
   const categoryColors = {
     residential: "bg-green-100 text-green-800",
     commercial: "bg-blue-100 text-blue-800",
-    interior: "bg-purple-100 text-purple-800",
+    interior: "bg-yellow-100 text-yellow-800",
   };
 
   return (

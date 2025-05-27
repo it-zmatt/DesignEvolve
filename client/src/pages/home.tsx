@@ -67,9 +67,9 @@ export default function Home() {
       <section className="py-24 bg-muted">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
+            <div className="space-y-8 slide-in-left">
               <div>
-                <h2 className="heading-secondary mb-6">
+                <h2 className="heading-secondary mb-6 fade-in">
                   About <span className="font-bold">AXIS</span>
                 </h2>
                 {contentLoading ? (
