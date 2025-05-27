@@ -577,6 +577,28 @@ export const translations: Translations = {
     FR: 'Consultation'
   },
 
+  // Footer
+  'footer.description': {
+    EN: 'Creating timeless architectural solutions that blend innovation with sustainability. Your vision, our expertise.',
+    AR: 'خلق حلول معمارية خالدة تمزج بين الابتكار والاستدامة. رؤيتك، خبرتنا.',
+    FR: 'Créer des solutions architecturales intemporelles qui allient innovation et durabilité. Votre vision, notre expertise.'
+  },
+  'footer.quick.links': {
+    EN: 'Quick Links',
+    AR: 'روابط سريعة',
+    FR: 'Liens Rapides'
+  },
+  'footer.permits': {
+    EN: 'Permits & Approvals',
+    AR: 'التصاريح والموافقات',
+    FR: 'Permis et Approbations'
+  },
+  'footer.copyright': {
+    EN: '© 2024 AXIS Architecture. All rights reserved.',
+    AR: '© 2024 آكسيس للهندسة المعمارية. جميع الحقوق محفوظة.',
+    FR: '© 2024 AXIS Architecture. Tous droits réservés.'
+  },
+
   // Common
   'common.featured': {
     EN: 'Featured',

@@ -1,6 +1,8 @@
 import { Link } from "wouter";
+import { useTranslation } from "@/lib/TranslationContext";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-primary text-primary-foreground py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -8,7 +10,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-3xl font-bold mb-4">AXIS</h3>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Creating timeless architectural solutions that blend innovation with sustainability. Your vision, our expertise.
+              {t("footer.description")}
             </p>
             <div className="flex space-x-4">
               <a
@@ -33,40 +35,40 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4">{t("footer.quick.links")}</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/">
                   <span className="text-muted-foreground hover:text-accent transition-colors duration-200 cursor-pointer">
-                    Home
+                    {t("nav.home")}
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/about">
                   <span className="text-muted-foreground hover:text-accent transition-colors duration-200 cursor-pointer">
-                    About
+                    {t("nav.about")}
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/services">
                   <span className="text-muted-foreground hover:text-accent transition-colors duration-200 cursor-pointer">
-                    Services
+                    {t("nav.services")}
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/portfolio">
                   <span className="text-muted-foreground hover:text-accent transition-colors duration-200 cursor-pointer">
-                    Portfolio
+                    {t("nav.portfolio")}
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact">
                   <span className="text-muted-foreground hover:text-accent transition-colors duration-200 cursor-pointer">
-                    Contact
+                    {t("nav.contact")}
                   </span>
                 </Link>
               </li>
@@ -74,19 +76,19 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <h4 className="text-lg font-semibold mb-4">{t("nav.services")}</h4>
             <ul className="space-y-2">
               <li>
-                <span className="text-muted-foreground">Residential Design</span>
+                <span className="text-muted-foreground">{t("nav.services.residential")}</span>
               </li>
               <li>
-                <span className="text-muted-foreground">Commercial Design</span>
+                <span className="text-muted-foreground">{t("nav.services.commercial")}</span>
               </li>
               <li>
-                <span className="text-muted-foreground">Interior Design</span>
+                <span className="text-muted-foreground">{t("nav.services.interior")}</span>
               </li>
               <li>
-                <span className="text-muted-foreground">Permits & Approvals</span>
+                <span className="text-muted-foreground">{t("footer.permits")}</span>
               </li>
             </ul>
           </div>
@@ -94,7 +96,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-muted-foreground">
-            &copy; 2024 AXIS Architecture. All rights reserved.
+            {t("footer.copyright")}
           </p>
         </div>
       </div>

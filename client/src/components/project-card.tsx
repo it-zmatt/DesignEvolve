@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { MapPin, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "@/lib/TranslationContext";
 import type { Project } from "@shared/schema";
 import { cn, getImageUrl, truncateText } from "@/lib/utils";
 
@@ -11,6 +12,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, className }: ProjectCardProps) {
+  const { t } = useTranslation();
+  
   const categoryColors = {
     residential: "bg-green-100 text-green-800",
     commercial: "bg-blue-100 text-blue-800",
@@ -35,11 +38,11 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
                 categoryColors[project.category as keyof typeof categoryColors]
               )}
             >
-              {project.category}
+              {t(`nav.services.${project.category}`)}
             </Badge>
             {project.featured && (
               <Badge variant="secondary" className="text-xs">
-                Featured
+                {t("common.featured")}
               </Badge>
             )}
           </div>
