@@ -4,19 +4,21 @@ import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
-import { getServices } from "@/lib/dataService";
-import type { Service } from "@shared/schema";
+import { useDirection } from "@/hooks/useDirection";
+import { getLocalizedServices } from "@/lib/multilingualDataService";
+import type { LocalizedService } from "@/types/multilingual";
 
 export default function Services() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const { dir } = useDirection();
   
-  const { data: services, isLoading } = useQuery<Service[]>({
-    queryKey: ["services"],
-    queryFn: getServices,
+  const { data: services, isLoading } = useQuery<LocalizedService[]>({
+    queryKey: ["services", language],
+    queryFn: () => getLocalizedServices(language),
   });
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       {/* Hero Section */}

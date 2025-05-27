@@ -23,7 +23,7 @@ export default function HeroSection({
       <div className="absolute inset-0 z-0">
         <img
           src={backgroundImage}
-          alt="Modern architectural building"
+          alt={t("hero.image.alt")}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 hero-overlay"></div>

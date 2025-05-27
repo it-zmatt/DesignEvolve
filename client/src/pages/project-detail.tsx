@@ -8,18 +8,20 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
-import { getProject } from "@/lib/dataService";
+import { useDirection } from "@/hooks/useDirection";
+import { getLocalizedProject } from "@/lib/multilingualDataService";
 import { cn, getImageUrl } from "@/lib/utils";
-import type { Project } from "@shared/schema";
+import type { LocalizedProject } from "@/types/multilingual";
 
 export default function ProjectDetail() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const { dir } = useDirection();
   const params = useParams();
   const projectId = params.id ? parseInt(params.id) : null;
 
-  const { data: project, isLoading, error } = useQuery<Project>({
-    queryKey: ["project", projectId],
-    queryFn: () => getProject(projectId!),
+  const { data: project, isLoading, error } = useQuery<LocalizedProject | undefined>({
+    queryKey: ["project", projectId, language],
+    queryFn: () => getLocalizedProject(language, projectId!),
     enabled: !!projectId,
   });
 
@@ -33,10 +35,10 @@ export default function ProjectDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-primary mb-4">Project Not Found</h1>
-          <p className="text-muted-foreground mb-6">The project you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-primary mb-4">{t("project.not.found")}</h1>
+          <p className="text-muted-foreground mb-6">{t("project.not.found.text")}</p>
           <Link href="/portfolio">
-            <Button>Back to Portfolio</Button>
+            <Button>{t("project.back.portfolio")}</Button>
           </Link>
         </div>
       </div>
@@ -44,7 +46,7 @@ export default function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       <div className="pt-24">
@@ -53,7 +55,7 @@ export default function ProjectDetail() {
           <Link href="/portfolio">
             <Button variant="ghost" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back to Portfolio
+              {t("project.back.portfolio")}
             </Button>
           </Link>
         </div>
@@ -96,10 +98,10 @@ export default function ProjectDetail() {
                     categoryColors[project.category as keyof typeof categoryColors]
                   )}
                 >
-                  {project.category}
+                  {t(`nav.services.${project.category}`)}
                 </Badge>
                 {project.featured && (
-                  <Badge variant="secondary">Featured</Badge>
+                  <Badge variant="secondary">{t("common.featured")}</Badge>
                 )}
               </div>
               
@@ -132,7 +134,7 @@ export default function ProjectDetail() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-2xl font-semibold text-primary mb-4">
-                    Project Overview
+                    {t("project.overview")}
                   </h2>
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     {project.description}
@@ -142,7 +144,7 @@ export default function ProjectDetail() {
                 {project.features && project.features.length > 0 && (
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-4">
-                      Key Features
+                      {t("project.features")}
                     </h3>
                     <ul className="space-y-2">
                       {project.features.map((feature, index) => (
@@ -160,7 +162,7 @@ export default function ProjectDetail() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-2xl font-semibold text-primary mb-6">
-                    Project Details
+                    {t("project.details")}
                   </h2>
                   
                   <div className="space-y-6">
@@ -168,7 +170,7 @@ export default function ProjectDetail() {
                       <div className="flex items-start gap-4">
                         <User className="w-5 h-5 text-accent mt-1" />
                         <div>
-                          <h4 className="font-semibold text-primary mb-1">Client</h4>
+                          <h4 className="font-semibold text-primary mb-1">{t("common.client")}</h4>
                           <p className="text-muted-foreground">{project.client}</p>
                         </div>
                       </div>
@@ -178,7 +180,7 @@ export default function ProjectDetail() {
                       <div className="flex items-start gap-4">
                         <Home className="w-5 h-5 text-accent mt-1" />
                         <div>
-                          <h4 className="font-semibold text-primary mb-1">Project Size</h4>
+                          <h4 className="font-semibold text-primary mb-1">{t("common.size")}</h4>
                           <p className="text-muted-foreground">{project.size}</p>
                         </div>
                       </div>
@@ -188,7 +190,7 @@ export default function ProjectDetail() {
                       <div className="flex items-start gap-4">
                         <Clock className="w-5 h-5 text-accent mt-1" />
                         <div>
-                          <h4 className="font-semibold text-primary mb-1">Duration</h4>
+                          <h4 className="font-semibold text-primary mb-1">{t("common.duration")}</h4>
                           <p className="text-muted-foreground">{project.duration}</p>
                         </div>
                       </div>
@@ -198,7 +200,7 @@ export default function ProjectDetail() {
                       <div className="flex items-start gap-4">
                         <DollarSign className="w-5 h-5 text-accent mt-1" />
                         <div>
-                          <h4 className="font-semibold text-primary mb-1">Budget</h4>
+                          <h4 className="font-semibold text-primary mb-1">{t("common.budget")}</h4>
                           <p className="text-muted-foreground">{project.budget}</p>
                         </div>
                       </div>
@@ -212,14 +214,14 @@ export default function ProjectDetail() {
             {project.images && project.images.length > 1 && (
               <div className="mb-16">
                 <h2 className="text-2xl font-semibold text-primary mb-8">
-                  Project Gallery
+                  {t("project.gallery")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {project.images.slice(1).map((image, index) => (
                     <img
                       key={index}
                       src={getImageUrl(image)}
-                      alt={`${project.title} - Image ${index + 2}`}
+                      alt={t("project.image.alt", { title: project.title, number: index + 2 })}
                       className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
                     />
                   ))}
@@ -230,17 +232,17 @@ export default function ProjectDetail() {
             {/* Related Projects CTA */}
             <div className="border-t border-border pt-16 text-center">
               <h2 className="text-2xl font-semibold text-primary mb-4">
-                Interested in Similar Projects?
+                {t("project.interested")}
               </h2>
               <p className="text-muted-foreground mb-8">
-                Explore more of our architectural work or get in touch to discuss your project.
+                {t("project.interested.text")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/portfolio">
-                  <Button variant="outline">View More Projects</Button>
+                  <Button variant="outline">{t("project.view.more")}</Button>
                 </Link>
                 <Link href="/contact">
-                  <Button>Start Your Project</Button>
+                  <Button>{t("project.start")}</Button>
                 </Link>
               </div>
             </div>

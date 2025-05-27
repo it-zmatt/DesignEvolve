@@ -2,31 +2,55 @@
   {
     "id": 1,
     "key": "hero.title",
-    "value": "Timeless Architecture"
+    "value": {
+      "EN": "Timeless Architecture",
+      "AR": "عمارة خالدة",
+      "FR": "Architecture Intemporelle"
+    }
   },
   {
     "id": 2,
-    "key": "hero.subtitle", 
-    "value": "Creating spaces that inspire and endure through innovative design and sustainable practices."
+    "key": "hero.subtitle",
+    "value": {
+      "EN": "Creating spaces that inspire and endure through innovative design and sustainable practices.",
+      "AR": "خلق مساحات تلهم وتدوم من خلال التصميم المبتكر والممارسات المستدامة.",
+      "FR": "Créer des espaces qui inspirent et perdurent grâce à un design innovant et des pratiques durables."
+    }
   },
   {
     "id": 3,
     "key": "about.description",
-    "value": "Founded in 2013, AXIS Architecture has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience."
+    "value": {
+      "EN": "Founded in 2013, Astarchitect has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience.",
+      "AR": "تأسست شركة أستارشيتكت في عام 2013، وكانت في المقدمة في التصميم المبتكر، حيث تخلق مساحات تمزج بسلاسة بين الوظائف والتميز الجمالي. يؤمن فريقنا من المهندسين المعماريين ذوي الخبرة أن العمارة العظيمة يجب ألا تخدم غرضها فحسب، بل تلهم وترتقي أيضًا بالتجربة الإنسانية.",
+      "FR": "Fondée en 2013, Astarchitect a été à l'avant-garde de la conception innovante, créant des espaces qui allient harmonieusement fonctionnalité et excellence esthétique. Notre équipe d'architectes expérimentés croit que la grande architecture ne doit pas seulement servir son objectif, mais aussi inspirer et élever l'expérience humaine."
+    }
   },
   {
     "id": 4,
     "key": "stats.experience",
-    "value": "10+"
+    "value": {
+      "EN": "10+",
+      "AR": "+10",
+      "FR": "+10"
+    }
   },
   {
     "id": 5,
     "key": "stats.projects",
-    "value": "50+"
+    "value": {
+      "EN": "50+",
+      "AR": "+50",
+      "FR": "+50"
+    }
   },
   {
     "id": 6,
     "key": "stats.awards",
-    "value": "15"
+    "value": {
+      "EN": "15",
+      "AR": "15",
+      "FR": "15"
+    }
   }
 ]

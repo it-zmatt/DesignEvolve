@@ -7,16 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/TranslationContext";
-import { getProjects, getProjectsByCategory } from "@/lib/dataService";
-import type { Project } from "@shared/schema";
+import { useDirection } from "@/hooks/useDirection";
+import { getLocalizedProjectsByCategory } from "@/lib/multilingualDataService";
+import type { LocalizedProject } from "@/types/multilingual";
 
 export default function Portfolio() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const { dir } = useDirection();
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const { data: projects, isLoading } = useQuery<Project[]>({
-    queryKey: ["projects", activeFilter],
-    queryFn: () => getProjectsByCategory(activeFilter),
+  const { data: projects, isLoading } = useQuery<LocalizedProject[]>({
+    queryKey: ["projects", activeFilter, language],
+    queryFn: () => getLocalizedProjectsByCategory(language, activeFilter),
   });
 
   const filters = [
@@ -31,7 +33,7 @@ export default function Portfolio() {
 
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       {/* Hero Section */}
@@ -90,7 +92,7 @@ export default function Portfolio() {
           {!isLoading && filteredProjects.length === 0 && (
             <div className="text-center py-16">
               <p className="text-xl text-muted-foreground">
-                No projects found for the selected category.
+                {t("portfolio.no.projects")}
               </p>
             </div>
           )}

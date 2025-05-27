@@ -12,12 +12,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { Skeleton } from "@/components/ui/skeleton";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useTranslation } from "@/lib/TranslationContext";
-import { getContent } from "@/lib/dataService";
+import { useDirection } from "@/hooks/useDirection";
 import { insertContactSchema } from "@shared/schema";
-import type { Content, InsertContact } from "@shared/schema";
+import type { InsertContact } from "@shared/schema";
 import { z } from "zod";
 
 const contactFormSchema = insertContactSchema.extend({
@@ -30,13 +29,11 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Contact() {
   const { t } = useTranslation();
+  const { dir } = useDirection();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: content, isLoading: contentLoading } = useQuery<Content[]>({
-    queryKey: ["content"],
-    queryFn: getContent,
-  });
+
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -78,23 +75,20 @@ export default function Contact() {
     contactMutation.mutate(data);
   };
 
-  const getContentValue = (key: string, fallback: string = "") => {
-    const item = content?.find(c => c.key === key);
-    return item?.value || fallback;
-  };
+
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h1 className="heading-primary mb-6">
-            Get In <span className="font-bold">Touch</span>
+            {t("page.contact.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start your next architectural project? We'd love to hear about your vision and discuss how we can bring it to life.
+            {t("page.contact.subtitle")}
           </p>
         </div>
       </section>
@@ -107,7 +101,7 @@ export default function Contact() {
             <Card className="shadow-lg">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold text-primary mb-6">
-                  Send us a message
+                  {t("contact.form.title")}
                 </h3>
                 
                 <Form {...form}>
@@ -117,10 +111,10 @@ export default function Contact() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Your full name"
+                                                <FormLabel>{t("contact.form.name")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t("form.name.placeholder")}
                               className="form-input"
                               {...field}
                             />
@@ -135,11 +129,11 @@ export default function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="your.email@example.com"
+                                                <FormLabel>{t("contact.form.email")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder={t("form.email.placeholder")}
                               className="form-input"
                               {...field}
                             />
@@ -154,19 +148,19 @@ export default function Contact() {
                       name="projectType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Project Type</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="form-input">
-                                <SelectValue placeholder="Select a project type" />
+                                                <FormLabel>{t("contact.form.project")}</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                        <FormControl>
+                          <SelectTrigger className="form-input">
+                            <SelectValue placeholder={t("form.project.placeholder")} />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent>
-                              <SelectItem value="residential">Residential Design</SelectItem>
-                              <SelectItem value="commercial">Commercial Design</SelectItem>
-                              <SelectItem value="interior">Interior Design</SelectItem>
-                              <SelectItem value="consultation">Consultation</SelectItem>
-                            </SelectContent>
+                                                    <SelectContent>
+                          <SelectItem value="residential">{t("form.project.residential")}</SelectItem>
+                          <SelectItem value="commercial">{t("form.project.commercial")}</SelectItem>
+                          <SelectItem value="interior">{t("form.project.interior")}</SelectItem>
+                          <SelectItem value="consultation">{t("form.project.consultation")}</SelectItem>
+                        </SelectContent>
                           </Select>
                           <FormMessage />
                         </FormItem>
@@ -178,10 +172,10 @@ export default function Contact() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Message</FormLabel>
+                          <FormLabel>{t("contact.form.message")}</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Tell us about your project..."
+                              placeholder={t("form.message.placeholder")}
                               className="form-textarea min-h-[120px]"
                               {...field}
                             />
@@ -196,7 +190,7 @@ export default function Contact() {
                       className="w-full btn-primary"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
                     </Button>
                   </form>
                 </Form>
@@ -208,70 +202,51 @@ export default function Contact() {
               <Card className="shadow-lg">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-semibold text-primary mb-6">
-                    Contact Information
+                    {t("contact.info")}
                   </h3>
                   
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
                       <MapPin className="w-6 h-6 text-accent mt-1" />
                       <div>
-                        <h4 className="font-semibold text-primary mb-1">Address</h4>
-                        {contentLoading ? (
-                          <div className="space-y-2">
-                            <Skeleton className="h-4 w-32" />
-                            <Skeleton className="h-4 w-28" />
-                          </div>
-                        ) : (
-                          <p className="text-muted-foreground whitespace-pre-line">
-                            {getContentValue("contact.address", "123 Architecture Plaza\nSan Francisco, CA 94102\nUnited States")}
-                          </p>
-                        )}
+                        <h4 className="font-semibold text-primary mb-1">{t("contact.address")}</h4>
+                        <p className="text-muted-foreground">
+                          {t("contact.address.street")}<br />
+                          {t("contact.address.city")}<br />
+                          {t("contact.address.country")}
+                        </p>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <Phone className="w-6 h-6 text-accent mt-1" />
                       <div>
-                        <h4 className="font-semibold text-primary mb-1">Phone</h4>
-                        {contentLoading ? (
-                          <Skeleton className="h-4 w-32" />
-                        ) : (
-                          <p className="text-muted-foreground">
-                            {getContentValue("contact.phone", "(415) 555-0123")}
-                          </p>
-                        )}
+                        <h4 className="font-semibold text-primary mb-1">{t("contact.phone")}</h4>
+                        <p className="text-muted-foreground">
+                          {t("contact.phone.number")}
+                        </p>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <Mail className="w-6 h-6 text-accent mt-1" />
                       <div>
-                        <h4 className="font-semibold text-primary mb-1">Email</h4>
-                        {contentLoading ? (
-                          <Skeleton className="h-4 w-48" />
-                        ) : (
-                          <p className="text-muted-foreground">
-                            {getContentValue("contact.email", "info@axisarchitecture.com")}
-                          </p>
-                        )}
+                        <h4 className="font-semibold text-primary mb-1">{t("contact.form.email")}</h4>
+                        <p className="text-muted-foreground">
+                          {t("contact.email.address")}
+                        </p>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4">
                       <Clock className="w-6 h-6 text-accent mt-1" />
                       <div>
-                        <h4 className="font-semibold text-primary mb-1">Office Hours</h4>
-                        {contentLoading ? (
-                          <div className="space-y-2">
-                            <Skeleton className="h-4 w-40" />
-                            <Skeleton className="h-4 w-36" />
-                            <Skeleton className="h-4 w-24" />
-                          </div>
-                        ) : (
-                          <p className="text-muted-foreground whitespace-pre-line">
-                            {getContentValue("contact.hours", "Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed")}
-                          </p>
-                        )}
+                        <h4 className="font-semibold text-primary mb-1">{t("contact.hours")}</h4>
+                        <p className="text-muted-foreground">
+                          {t("contact.hours.weekdays")}<br />
+                          {t("contact.hours.saturday")}<br />
+                          {t("contact.hours.sunday")}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -281,12 +256,12 @@ export default function Contact() {
               {/* Google Maps Placeholder */}
               <Card className="shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold text-primary mb-6">Find Us</h3>
+                  <h3 className="text-2xl font-semibold text-primary mb-6">{t("contact.find.us")}</h3>
                   <div className="bg-muted h-64 rounded-lg flex items-center justify-center">
                     <div className="text-center text-muted-foreground">
                       <MapPin className="w-12 h-12 mx-auto mb-4" />
-                      <p className="font-medium">Interactive Google Maps</p>
-                      <p className="text-sm">Location: San Francisco, CA</p>
+                      <p className="font-medium">{t("contact.map.location")}</p>
+                      <p className="text-sm">{t("contact.map.text")}</p>
                     </div>
                   </div>
                 </CardContent>

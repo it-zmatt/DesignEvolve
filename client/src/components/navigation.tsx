@@ -41,7 +41,7 @@ export default function Navigation() {
           <div className="flex-shrink-0">
             <Link href="/">
               <h1 className="text-2xl font-bold text-primary cursor-pointer">
-                AXIS
+                Astarchitect
               </h1>
             </Link>
           </div>

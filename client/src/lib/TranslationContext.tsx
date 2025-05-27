@@ -4,7 +4,7 @@ import { Language, getTranslation, saveLanguagePreference, getLanguagePreference
 interface TranslationContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, options?: { count?: number; [key: string]: any }) => string;
 }
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
@@ -41,7 +41,8 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const t = (key: string) => getTranslation(key, language);
+  const t = (key: string, options?: { count?: number; [key: string]: any }) => 
+    getTranslation(key, language, options);
 
   return (
     <TranslationContext.Provider value={{ language, setLanguage, t }}>

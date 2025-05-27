@@ -3,10 +3,12 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
+import { useDirection } from "@/hooks/useDirection";
 import type { Content } from "@shared/schema";
 
 export default function About() {
   const { t } = useTranslation();
+  const { dir } = useDirection();
   
   const { data: content, isLoading } = useQuery<Content[]>({
     queryKey: ["/api/content"],
@@ -18,7 +20,7 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       {/* Hero Section */}
@@ -60,7 +62,7 @@ export default function About() {
                     {t("about.description")}
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    We specialize in sustainable design practices, ensuring that our projects not only meet today's needs but also contribute to a better tomorrow. From conceptual design to project completion, we work closely with our clients to bring their vision to life.
+                    {t("about.description.extended")}
                   </p>
                 </div>
               )}
@@ -84,12 +86,12 @@ export default function About() {
             <div className="space-y-6">
               <img
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Architectural team collaborating in modern office"
+                alt={t("about.team.alt")}
                 className="w-full h-64 object-cover rounded-lg shadow-lg"
               />
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Architectural blueprints and design sketches"
+                alt={t("about.blueprints.alt")}
                 className="w-full h-48 object-cover rounded-lg shadow-lg"
               />
             </div>
@@ -148,7 +150,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="heading-secondary mb-6">
-              Our <span className="font-bold">Journey</span>
+              {t("about.journey")}
             </h2>
           </div>
 
@@ -160,9 +162,9 @@ export default function About() {
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 bg-accent rounded-full"></div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">Company Founded</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{t("about.founded")}</h3>
                   <p className="text-muted-foreground">
-                    AXIS Architecture was established with a vision to create innovative, sustainable architectural solutions.
+                    {t("about.founded.text")}
                   </p>
                 </div>
               </div>
@@ -173,9 +175,9 @@ export default function About() {
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 bg-accent rounded-full"></div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">First Major Project</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{t("about.first.project")}</h3>
                   <p className="text-muted-foreground">
-                    Completed our first major commercial development, establishing our reputation for excellence.
+                    {t("about.first.project.text")}
                   </p>
                 </div>
               </div>
@@ -186,9 +188,9 @@ export default function About() {
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 bg-accent rounded-full"></div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">Sustainability Focus</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{t("about.sustainability.focus")}</h3>
                   <p className="text-muted-foreground">
-                    Dedicated our practice to sustainable design, becoming certified in green building practices.
+                    {t("about.sustainability.focus.text")}
                   </p>
                 </div>
               </div>
@@ -199,9 +201,9 @@ export default function About() {
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 bg-accent rounded-full"></div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">Industry Recognition</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{t("about.recognition")}</h3>
                   <p className="text-muted-foreground">
-                    Received multiple awards for architectural excellence and sustainable design innovation.
+                    {t("about.recognition.text")}
                   </p>
                 </div>
               </div>
@@ -212,9 +214,9 @@ export default function About() {
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 bg-accent rounded-full"></div>
                 <div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">Continued Growth</h3>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{t("about.growth")}</h3>
                   <p className="text-muted-foreground">
-                    Celebrating over 50 completed projects and expanding our team of talented architects.
+                    {t("about.growth.text")}
                   </p>
                 </div>
               </div>

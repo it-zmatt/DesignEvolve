@@ -1,29 +1,61 @@
 [
   {
     "id": 1,
-    "title": "Residential Design",
-    "description": "Custom home design services that blend functionality with aesthetic excellence. From concept to completion, we create living spaces that reflect your lifestyle and values.",
+    "title": {
+      "EN": "Residential Design",
+      "AR": "التصميم السكني",
+      "FR": "Design Résidentiel"
+    },
+    "description": {
+      "EN": "Custom home design services that blend functionality with aesthetic excellence. From concept to completion, we create living spaces that reflect your lifestyle and values.",
+      "AR": "خدمات تصميم المنازل المخصصة التي تمزج بين الوظائف والتميز الجمالي. من المفهوم إلى الإنجاز، نخلق مساحات معيشة تعكس أسلوب حياتك وقيمك.",
+      "FR": "Services de conception de maisons sur mesure qui allient fonctionnalité et excellence esthétique. Du concept à la réalisation, nous créons des espaces de vie qui reflètent votre style de vie et vos valeurs."
+    },
     "icon": "home",
     "order": 1
   },
   {
     "id": 2,
-    "title": "Commercial Design", 
-    "description": "Innovative commercial spaces that enhance productivity and brand identity. We design offices, retail spaces, and mixed-use developments that drive business success.",
+    "title": {
+      "EN": "Commercial Design",
+      "AR": "التصميم التجاري",
+      "FR": "Design Commercial"
+    },
+    "description": {
+      "EN": "Innovative commercial spaces that enhance productivity and brand identity. We design offices, retail spaces, and mixed-use developments that drive business success.",
+      "AR": "مساحات تجارية مبتكرة تعزز الإنتاجية وهوية العلامة التجارية. نصمم المكاتب ومساحات البيع بالتجزئة والتطويرات متعددة الاستخدامات التي تدفع نجاح الأعمال.",
+      "FR": "Espaces commerciaux innovants qui améliorent la productivité et l'identité de marque. Nous concevons des bureaux, des espaces de vente et des développements à usage mixte qui favorisent le succès commercial."
+    },
     "icon": "building",
     "order": 2
   },
   {
     "id": 3,
-    "title": "Interior Design",
-    "description": "Complete interior design solutions that transform spaces into beautiful, functional environments. Our team handles everything from space planning to furniture selection.",
+    "title": {
+      "EN": "Interior Design",
+      "AR": "التصميم الداخلي",
+      "FR": "Design Intérieur"
+    },
+    "description": {
+      "EN": "Complete interior design solutions that transform spaces into beautiful, functional environments. Our team handles everything from space planning to furniture selection.",
+      "AR": "حلول تصميم داخلي كاملة تحول المساحات إلى بيئات جميلة وعملية. يتعامل فريقنا مع كل شيء من تخطيط المساحة إلى اختيار الأثاث.",
+      "FR": "Solutions de design intérieur complètes qui transforment les espaces en environnements beaux et fonctionnels. Notre équipe s'occupe de tout, de la planification de l'espace à la sélection du mobilier."
+    },
     "icon": "palette",
     "order": 3
   },
   {
     "id": 4,
-    "title": "Project Management",
-    "description": "Comprehensive project management services ensuring your architectural project is delivered on time, within budget, and to the highest quality standards.",
+    "title": {
+      "EN": "Project Management",
+      "AR": "إدارة المشاريع",
+      "FR": "Gestion de Projet"
+    },
+    "description": {
+      "EN": "Comprehensive project management services ensuring your architectural project is delivered on time, within budget, and to the highest quality standards.",
+      "AR": "خدمات إدارة مشاريع شاملة تضمن تسليم مشروعك المعماري في الوقت المحدد وضمن الميزانية وبأعلى معايير الجودة.",
+      "FR": "Services complets de gestion de projet garantissant que votre projet architectural soit livré à temps, dans le budget et selon les plus hauts standards de qualité."
+    },
     "icon": "clipboard",
     "order": 4
   }

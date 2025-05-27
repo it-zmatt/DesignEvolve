@@ -8,6 +8,33 @@ export interface Translations {
   };
 }
 
+// Enhanced translation function that supports interpolation and plurals
+export function getTranslation(key: string, language: Language, options?: { 
+  count?: number; 
+  [key: string]: any; 
+}): string {
+  const translation = translations[key];
+  
+  if (!translation) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`Translation missing for key: ${key}`);
+    }
+    return key;
+  }
+  
+  let text = translation[language] || translation.EN || key;
+  
+  // Handle interpolation
+  if (options) {
+    Object.keys(options).forEach(optionKey => {
+      const placeholder = `{{${optionKey}}}`;
+      text = text.replace(new RegExp(placeholder, 'g'), String(options[optionKey]));
+    });
+  }
+  
+  return text;
+}
+
 export const translations: Translations = {
   // Navigation
   'nav.home': {
@@ -72,6 +99,11 @@ export const translations: Translations = {
     AR: 'اطلع على مشاريعنا',
     FR: 'Voir nos projets'
   },
+  'hero.image.alt': {
+    EN: 'Modern architectural building',
+    AR: 'مبنى معماري حديث',
+    FR: 'Bâtiment architectural moderne'
+  },
 
   // Stats Section
   'stats.years.value': {
@@ -122,14 +154,19 @@ export const translations: Translations = {
 
   // About Section
   'about.title': {
-    EN: 'About AXIS',
-    AR: 'حول آكسيس',
-    FR: 'À propos d\'AXIS'
+    EN: 'About Astarchitect',
+    AR: 'حول أستارشيتكت',
+    FR: 'À propos d\'Astarchitect'
   },
   'about.description': {
-    EN: 'Founded in 2013, AXIS Architecture has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience.',
-    AR: 'تأسست شركة آكسيس للهندسة المعمارية في عام 2013، وكانت في المقدمة في التصميم المبتكر، حيث تخلق مساحات تمزج بسلاسة بين الوظائف والتميز الجمالي. يؤمن فريقنا من المهندسين المعماريين ذوي الخبرة أن العمارة العظيمة يجب ألا تخدم غرضها فحسب، بل تلهم وترتقي أيضًا بالتجربة الإنسانية.',
-    FR: 'Fondée en 2013, AXIS Architecture a été à l\'avant-garde de la conception innovante, créant des espaces qui allient harmonieusement fonctionnalité et excellence esthétique. Notre équipe d\'architectes expérimentés croit que la grande architecture ne doit pas seulement servir son objectif, mais aussi inspirer et élever l\'expérience humaine.'
+    EN: 'Founded in 2013, Astarchitect has been at the forefront of innovative design, creating spaces that seamlessly blend functionality with aesthetic excellence. Our team of experienced architects believes that great architecture should not only serve its purpose but also inspire and elevate the human experience.',
+    AR: 'تأسست شركة أستارشيتكت في عام 2013، وكانت في المقدمة في التصميم المبتكر، حيث تخلق مساحات تمزج بسلاسة بين الوظائف والتميز الجمالي. يؤمن فريقنا من المهندسين المعماريين ذوي الخبرة أن العمارة العظيمة يجب ألا تخدم غرضها فحسب، بل تلهم وترتقي أيضًا بالتجربة الإنسانية.',
+    FR: 'Fondée en 2013, Astarchitect a été à l\'avant-garde de la conception innovante, créant des espaces qui allient harmonieusement fonctionnalité et excellence esthétique. Notre équipe d\'architectes expérimentés croit que la grande architecture ne doit pas seulement servir son objectif, mais aussi inspirer et élever l\'expérience humaine.'
+  },
+  'about.description.extended': {
+    EN: 'We specialize in sustainable design practices, ensuring that our projects not only meet today\'s needs but also contribute to a better tomorrow. From conceptual design to project completion, we work closely with our clients to bring their vision to life.',
+    AR: 'نحن متخصصون في ممارسات التصميم المستدام، مما يضمن أن مشاريعنا لا تلبي احتياجات اليوم فحسب، بل تساهم أيضًا في غد أفضل. من التصميم المفاهيمي إلى إنجاز المشروع، نعمل بشكل وثيق مع عملائنا لتحقيق رؤيتهم.',
+    FR: 'Nous nous spécialisons dans les pratiques de conception durable, garantissant que nos projets répondent non seulement aux besoins d\'aujourd\'hui mais contribuent également à un avenir meilleur. De la conception conceptuelle à l\'achèvement du projet, nous travaillons en étroite collaboration avec nos clients pour donner vie à leur vision.'
   },
   'about.cta': {
     EN: 'Learn More About Us',
@@ -156,9 +193,9 @@ export const translations: Translations = {
 
   // Pages
   'page.about.title': {
-    EN: 'About AXIS',
-    AR: 'حول آكسيس',
-    FR: 'À propos d\'AXIS'
+    EN: 'About Astarchitect',
+    AR: 'حول أستارشيتكت',
+    FR: 'À propos d\'Astarchitect'
   },
   'page.about.subtitle': {
     EN: 'Pioneering architectural excellence through innovative design and sustainable practices for over a decade.',
@@ -194,6 +231,16 @@ export const translations: Translations = {
     EN: 'Ready to start your next architectural project? We\'d love to hear about your vision and discuss how we can bring it to life.',
     AR: 'هل أنت مستعد لبدء مشروعك المعماري التالي؟ نود أن نسمع عن رؤيتك ونناقش كيف يمكننا تحقيقها.',
     FR: 'Prêt à commencer votre prochain projet architectural ? Nous aimerions entendre parler de votre vision et discuter de la façon dont nous pouvons la concrétiser.'
+  },
+  'page.notfound.title': {
+    EN: '404 Page Not Found',
+    AR: '404 الصفحة غير موجودة',
+    FR: '404 Page Non Trouvée'
+  },
+  'page.notfound.description': {
+    EN: 'Did you forget to add the page to the router?',
+    AR: 'هل نسيت إضافة الصفحة إلى الموجه؟',
+    FR: 'Avez-vous oublié d\'ajouter la page au routeur?'
   },
 
   // Contact Form
@@ -327,9 +374,9 @@ export const translations: Translations = {
     FR: 'Fondation de l\'Entreprise'
   },
   'about.founded.text': {
-    EN: 'AXIS Architecture was established with a vision to create innovative, sustainable architectural solutions.',
-    AR: 'تأسست شركة آكسيس للهندسة المعمارية برؤية لخلق حلول معمارية مبتكرة ومستدامة.',
-    FR: 'AXIS Architecture a été créée avec la vision de créer des solutions architecturales innovantes et durables.'
+    EN: 'Astarchitect was established with a vision to create innovative, sustainable architectural solutions.',
+    AR: 'تأسست شركة أستارشيتكت برؤية لخلق حلول معمارية مبتكرة ومستدامة.',
+    FR: 'Astarchitect a été créée avec la vision de créer des solutions architecturales innovantes et durables.'
   },
   'about.first.project': {
     EN: 'First Major Project',
@@ -370,6 +417,16 @@ export const translations: Translations = {
     EN: 'Celebrating over 50 completed projects and expanding our team of talented architects.',
     AR: 'احتفال بأكثر من 50 مشروعاً مكتملاً وتوسيع فريقنا من المعماريين الموهوبين.',
     FR: 'Célébrant plus de 50 projets achevés et élargissant notre équipe d\'architectes talentueux.'
+  },
+  'about.team.alt': {
+    EN: 'Architectural team collaborating in modern office',
+    AR: 'فريق معماري يتعاون في مكتب حديث',
+    FR: 'Équipe d\'architectes collaborant dans un bureau moderne'
+  },
+  'about.blueprints.alt': {
+    EN: 'Architectural blueprints and design sketches',
+    AR: 'مخططات معمارية ورسوم تصميم',
+    FR: 'Plans architecturaux et croquis de conception'
   },
 
   // Services Page
@@ -492,6 +549,11 @@ export const translations: Translations = {
     AR: 'العودة إلى الأعمال',
     FR: 'Retour au Portfolio'
   },
+  'project.image.alt': {
+    EN: '{{title}} - Image {{number}}',
+    AR: '{{title}} - صورة {{number}}',
+    FR: '{{title}} - Image {{number}}'
+  },
 
   // Contact Page
   'contact.info': {
@@ -528,6 +590,48 @@ export const translations: Translations = {
     EN: 'Location: San Francisco, CA',
     AR: 'الموقع: سان فرانسيسكو، كاليفورنيا',
     FR: 'Emplacement: San Francisco, CA'
+  },
+  
+  // Contact Information Content
+  'contact.address.street': {
+    EN: '123 Architecture Plaza',
+    AR: '123 ساحة العمارة',
+    FR: '123 Place de l\'Architecture'
+  },
+  'contact.address.city': {
+    EN: 'San Francisco, CA 94102',
+    AR: 'سان فرانسيسكو، كاليفورنيا 94102',
+    FR: 'San Francisco, CA 94102'
+  },
+  'contact.address.country': {
+    EN: 'United States',
+    AR: 'الولايات المتحدة',
+    FR: 'États-Unis'
+  },
+  'contact.phone.number': {
+    EN: '(415) 555-0123',
+    AR: '(415) 555-0123',
+    FR: '(415) 555-0123'
+  },
+  'contact.email.address': {
+    EN: 'info@astarchitect.com',
+    AR: 'info@astarchitect.com',
+    FR: 'info@astarchitect.com'
+  },
+  'contact.hours.weekdays': {
+    EN: 'Monday - Friday: 9:00 AM - 6:00 PM',
+    AR: 'الاثنين - الجمعة: 9:00 صباحاً - 6:00 مساءً',
+    FR: 'Lundi - Vendredi: 9h00 - 18h00'
+  },
+  'contact.hours.saturday': {
+    EN: 'Saturday: 10:00 AM - 4:00 PM',
+    AR: 'السبت: 10:00 صباحاً - 4:00 مساءً',
+    FR: 'Samedi: 10h00 - 16h00'
+  },
+  'contact.hours.sunday': {
+    EN: 'Sunday: Closed',
+    AR: 'الأحد: مغلق',
+    FR: 'Dimanche: Fermé'
   },
   'contact.success': {
     EN: 'Message sent successfully!',
@@ -609,9 +713,9 @@ export const translations: Translations = {
     FR: 'Permis et Approbations'
   },
   'footer.copyright': {
-    EN: '© 2024 AXIS Architecture. All rights reserved.',
-    AR: '© 2024 آكسيس للهندسة المعمارية. جميع الحقوق محفوظة.',
-    FR: '© 2024 AXIS Architecture. Tous droits réservés.'
+    EN: '© 2024 Astarchitect. All rights reserved.',
+    AR: '© 2024 أستارشيتكت. جميع الحقوق محفوظة.',
+    FR: '© 2024 Astarchitect. Tous droits réservés.'
   },
 
   // Common
@@ -649,17 +753,18 @@ export const translations: Translations = {
     EN: 'Budget',
     AR: 'الميزانية',
     FR: 'Budget'
+  },
+  'common.loading': {
+    EN: 'Loading...',
+    AR: 'جاري التحميل...',
+    FR: 'Chargement...'
+  },
+  'common.error': {
+    EN: 'Error',
+    AR: 'خطأ',
+    FR: 'Erreur'
   }
 };
-
-export function getTranslation(key: string, language: Language): string {
-  const translation = translations[key];
-  if (!translation) {
-    console.warn(`Translation missing for key: ${key}`);
-    return key;
-  }
-  return translation[language] || translation.EN || key;
-}
 
 export function saveLanguagePreference(language: Language): void {
   localStorage.setItem('preferred-language', language);

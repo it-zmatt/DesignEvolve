@@ -8,20 +8,22 @@ import ProjectCard from "@/components/project-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
-import { getFeaturedProjects, getContent } from "@/lib/dataService";
-import type { Project, Content } from "@shared/schema";
+import { useDirection } from "@/hooks/useDirection";
+import { getLocalizedFeaturedProjects, getLocalizedContent } from "@/lib/multilingualDataService";
+import type { LocalizedProject, LocalizedContent } from "@/types/multilingual";
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const { dir } = useDirection();
   
-  const { data: featuredProjects, isLoading: projectsLoading } = useQuery<Project[]>({
-    queryKey: ["featured-projects"],
-    queryFn: getFeaturedProjects,
+  const { data: featuredProjects, isLoading: projectsLoading } = useQuery<LocalizedProject[]>({
+    queryKey: ["featured-projects", language],
+    queryFn: () => getLocalizedFeaturedProjects(language),
   });
 
-  const { data: content, isLoading: contentLoading } = useQuery<Content[]>({
-    queryKey: ["content"],
-    queryFn: getContent,
+  const { data: content, isLoading: contentLoading } = useQuery<LocalizedContent[]>({
+    queryKey: ["content", language],
+    queryFn: () => getLocalizedContent(language),
   });
 
   const getContentValue = (key: string, fallback: string = "") => {
@@ -55,7 +57,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={dir}>
       <Navigation />
       
       {/* Hero Section */}
