@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/TranslationContext";
+import { getProjects, getProjectsByCategory } from "@/lib/dataService";
 import type { Project } from "@shared/schema";
 
 export default function Portfolio() {
@@ -14,7 +15,8 @@ export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
 
   const { data: projects, isLoading } = useQuery<Project[]>({
-    queryKey: ["/api/projects"],
+    queryKey: ["projects", activeFilter],
+    queryFn: () => getProjectsByCategory(activeFilter),
   });
 
   const filters = [

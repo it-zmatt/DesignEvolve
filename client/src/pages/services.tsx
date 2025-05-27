@@ -4,13 +4,15 @@ import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/lib/TranslationContext";
+import { getServices } from "@/lib/dataService";
 import type { Service } from "@shared/schema";
 
 export default function Services() {
   const { t } = useTranslation();
   
   const { data: services, isLoading } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
+    queryKey: ["services"],
+    queryFn: getServices,
   });
 
   return (

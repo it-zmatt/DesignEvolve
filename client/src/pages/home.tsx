@@ -15,11 +15,13 @@ export default function Home() {
   const { t } = useTranslation();
   
   const { data: featuredProjects, isLoading: projectsLoading } = useQuery<Project[]>({
-    queryKey: ["/api/projects?featured=true"],
+    queryKey: ["featured-projects"],
+    queryFn: getFeaturedProjects,
   });
 
   const { data: content, isLoading: contentLoading } = useQuery<Content[]>({
-    queryKey: ["/api/content"],
+    queryKey: ["content"],
+    queryFn: getContent,
   });
 
   const getContentValue = (key: string, fallback: string = "") => {

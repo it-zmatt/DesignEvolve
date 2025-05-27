@@ -7,15 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/lib/TranslationContext";
+import { getProject } from "@/lib/dataService";
 import { cn, getImageUrl } from "@/lib/utils";
 import type { Project } from "@shared/schema";
 
 export default function ProjectDetail() {
+  const { t } = useTranslation();
   const params = useParams();
   const projectId = params.id ? parseInt(params.id) : null;
 
   const { data: project, isLoading, error } = useQuery<Project>({
-    queryKey: [`/api/projects/${projectId}`],
+    queryKey: ["project", projectId],
+    queryFn: () => getProject(projectId!),
     enabled: !!projectId,
   });
 
