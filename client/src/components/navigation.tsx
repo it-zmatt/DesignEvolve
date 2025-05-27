@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 export default function Navigation() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState("EN");
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -19,6 +21,18 @@ export default function Navigation() {
   const isActive = (href: string) => {
     if (href === "/") return location === "/";
     return location.startsWith(href);
+  };
+
+  const languages = [
+    { code: "EN", label: "English", flag: "🇺🇸" },
+    { code: "AR", label: "العربية", flag: "🇸🇦" },
+    { code: "FR", label: "Français", flag: "🇫🇷" },
+  ];
+
+  const handleLanguageChange = (languageCode: string) => {
+    setCurrentLanguage(languageCode);
+    // In a real implementation, this would trigger translation
+    console.log(`Language changed to: ${languageCode}`);
   };
 
   return (
@@ -50,15 +64,35 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              <Link href="/about">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="ml-4 border-accent text-accent hover:bg-accent hover:text-white transition-colors"
-                >
-                  Learn More
-                </Button>
-              </Link>
+              
+              {/* Language Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="ml-4 border-accent text-accent hover:bg-accent hover:text-white transition-colors"
+                  >
+                    <Globe className="w-4 h-4 mr-2" />
+                    {currentLanguage}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-40">
+                  {languages.map((language) => (
+                    <DropdownMenuItem
+                      key={language.code}
+                      onClick={() => handleLanguageChange(language.code)}
+                      className={cn(
+                        "cursor-pointer flex items-center gap-2",
+                        currentLanguage === language.code && "bg-accent/10 text-accent"
+                      )}
+                    >
+                      <span className="text-lg">{language.flag}</span>
+                      <span>{language.label}</span>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -98,6 +132,34 @@ export default function Navigation() {
                 </span>
               </Link>
             ))}
+            
+            {/* Mobile Language Selector */}
+            <div className="px-3 py-2 border-t border-border mt-2">
+              <div className="text-sm font-medium text-primary mb-2 flex items-center gap-2">
+                <Globe className="w-4 h-4" />
+                Language
+              </div>
+              <div className="space-y-1">
+                {languages.map((language) => (
+                  <button
+                    key={language.code}
+                    onClick={() => {
+                      handleLanguageChange(language.code);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "w-full text-left px-2 py-1 rounded flex items-center gap-2 text-sm",
+                      currentLanguage === language.code
+                        ? "bg-accent/10 text-accent font-medium"
+                        : "text-muted-foreground hover:text-accent"
+                    )}
+                  >
+                    <span className="text-base">{language.flag}</span>
+                    <span>{language.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
